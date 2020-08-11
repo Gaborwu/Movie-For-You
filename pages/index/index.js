@@ -9,7 +9,7 @@ Page({
   importFont: function() {
     wx.loadFontFace({
       family: 'Dancing Script',
-      source: 'url("https://cloud-minapp-36450.cloud.ifanrusercontent.com/1k5TkIviCFoo6hkB.ttf")',
+      source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k5V0aQMGnkPStxC.ttf")',
       success: console.log
     })
   },
