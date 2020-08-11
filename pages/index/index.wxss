@@ -1,0 +1,38 @@
+/**index.wxss**/
+
+
+.index-container {
+  background-color: #0F100F;
+  color: #FBFBFB;
+  background-image: url('https://cloud-minapp-36450.cloud.ifanrusercontent.com/1k5UFzwhW3L6E1Mw.png');
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-position: center;
+}
+
+.btn {
+  background-color: #6B9AC4;
+  color:  #FBFBFB;
+  bottom: 10%;
+  position: absolute;
+  transition: background 0.3s ease;
+  border-radius: 4px;
+  width: 90% !important;
+  height: 80rpx;
+}
+.btn hover {
+  background: #1BCB7F;
+  color: white;
+}
+
+
+.title {
+  font-family: Dancing Script;
+  font-size: 100rpx;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 15%;
+}

@@ -1,0 +1,4 @@
+<view class="index-container">
+  <view class="title">Movie For You</view>
+  <button class="btn">Enter the Lobby</button>
+</view>
