@@ -4,7 +4,7 @@
 .index-container {
   background-color: #0F100F;
   color: #FBFBFB;
-  background-image: url('https://cloud-minapp-36450.cloud.ifanrusercontent.com/1k5UFzwhW3L6E1Mw.png');
+  background-image: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k5V1CDOoCY9ZknJ.png');
   display: flex;
   justify-content: center;
   height: 100vh;
@@ -15,6 +15,16 @@
   background-color: #6B9AC4;
   color:  #FBFBFB;
   bottom: 10%;
+  position: absolute;
+  transition: background 0.3s ease;
+  border-radius: 4px;
+  width: 90% !important;
+  height: 80rpx;
+}
+.buttton_1 {
+  background-color: #6B9AC4;
+  color:  #FBFBFB;
+  bottom: 20%;
   position: absolute;
   transition: background 0.3s ease;
   border-radius: 4px;

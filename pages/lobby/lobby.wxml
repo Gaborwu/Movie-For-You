@@ -1,0 +1,14 @@
+<!--pages/lobby/lobby.wxml-->
+<view>Room ID</view>
+<view>{{lobby.id}}</view>
+<!-- Buttons -->
+<button wx:if="{{user.nickname && !user.isParticipant}}" type="warn" bindtap="addUserToLobby">Join Lobby</button>
+<button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
+<button wx:if="{{user.isParticipant}}" type="primary" open-type="share">Share</button>
+<button bindtap="redirectToType">Start</button>
+
+<!-- User -->
+
+<view wx:for="{{lobby.users}}">
+    {{item.name}}
+</view>

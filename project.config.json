@@ -10,14 +10,23 @@
 		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false,
 		"coverView": true,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"enhance": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.12.1",
-	"appid": "wx89702a1a7ba5276e",
+	"appid": "wxea87e3d3f19619c7",
 	"projectname": "Movie%20For%20You",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -34,13 +43,50 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"gamePlugin": {
 			"current": -1,
 			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/question/question",
+					"pathName": "pages/question/question",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/lobby/lobby",
+					"pathName": "pages/lobby/lobby",
+					"query": "id=5f3764faf0f3b002ed8bff20",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/type/type",
+					"pathName": "pages/type/type",
+					"query": "id=5f3764faf0f3b002ed8bff20",
+					"scene": null
+				}
+			]
 		}
 	}
 }
