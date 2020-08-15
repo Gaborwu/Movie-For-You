@@ -21,6 +21,16 @@
   width: 90% !important;
   height: 80rpx;
 }
+.buttton_1 {
+  background-color: #6B9AC4;
+  color:  #FBFBFB;
+  bottom: 20%;
+  position: absolute;
+  transition: background 0.3s ease;
+  border-radius: 4px;
+  width: 90% !important;
+  height: 80rpx;
+}
 .btn hover {
   background: #1BCB7F;
   color: white;

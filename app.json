@@ -1,7 +1,11 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/list/list",
+    "pages/lobby/lobby",
+    "pages/type/type",
+    "pages/duration/duration"
+   
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -11,7 +15,7 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  
+
   "plugins": {
     "sdkPlugin": {
       "version": "3.3.0",

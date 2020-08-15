@@ -1,0 +1,3 @@
+<!--pages/type/type.wxml-->
+<view class="subTitle">Gabor,请选择2部您喜欢的电影</view>
+<view wx:for="{{randomTypes}}">{{item.title}}</view>
