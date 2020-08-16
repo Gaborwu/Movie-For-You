@@ -35,9 +35,7 @@ Page({
             this.setData({randomTypes})
         }
         console.log(resultArray);
-        
     },
-
 
     onLoad: function (options) {
         this.fetchOptions();
