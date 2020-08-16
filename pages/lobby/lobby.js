@@ -120,9 +120,20 @@ Page({
             //console.log(random)
             let randomMovies = moviesArray
             this.setData({randomMovies})
+            this.submitMovieList();
         }
     },
-
+    // submitMovieList: function () {
+    //     let movie_list = this.data.randomMovies;
+    //     let lobby = this.data.lobby
+    //     let Lobby = new wx.BaaS.TableObject('lobby');
+    //     let entry = Lobby.getWithoutData(lobby.id);
+    //     entry.set(movie_list).update().then( res=> {
+    //         console.log(res)
+    //     }
+    //     );
+        
+    // },
     vote: function (e) {
         let votes = this.data.votes;
         let randomMovies = this.data.randomMovies;
@@ -143,18 +154,18 @@ Page({
     },
     sumbitVoteToLobby: function() {
         let lobby = this.data.lobby;
-        let user = this.data.user
         let users = lobby.users;
         let movies_id = this.data.votes;
-       
-        // let Lobby = new wx.BaaS.TableObject('lobby')
-        // let MyRecord = MyTableObject.create()
-        
-        
-
-
+        movies_id = {vote: movies_id}
+        users.push(movies_id)
+        let Lobby = new wx.BaaS.TableObject('lobby');
+        let entry = Lobby.getWithoutData(lobby.id)
+        entry.set({users}).update().then(
+            console.log ("succeed!")
+        );
 
     },
+
 
     onLoad: async function (options) {
         const id = options && options.id ? options.id : undefined;
