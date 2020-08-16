@@ -22,7 +22,7 @@
 <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn">Join Lobby</button>
 <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
 <button wx:if="{{user.isParticipant}}" type="primary" open-type="share" class="btn">Share</button>
-<button bindtap="redirectToType" class="startbtn">Submit</button>
+<button bindtap="redirectToType" class="startbtn" bindtap="sumbitVoteToLobby">Submit</button>
 </view>
 
 <!-- User -->
