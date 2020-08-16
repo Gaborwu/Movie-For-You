@@ -141,6 +141,20 @@ Page({
             this.setData({votes, randomMovies});
         }    
     },
+    sumbitVoteToLobby: function() {
+        let lobby = this.data.lobby;
+        let user = this.data.user
+        let users = lobby.users;
+        let movies_id = this.data.votes;
+       
+        // let Lobby = new wx.BaaS.TableObject('lobby')
+        // let MyRecord = MyTableObject.create()
+        
+        
+
+
+
+    },
 
     onLoad: async function (options) {
         const id = options && options.id ? options.id : undefined;
