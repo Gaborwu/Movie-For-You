@@ -85,6 +85,20 @@
 					"pathName": "pages/type/type",
 					"query": "id=5f3764faf0f3b002ed8bff20",
 					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "showPage",
+					"pathName": "pages/showPage/showPage",
+					"query": "id=5f33ee0c7ce5155207790ede",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "result",
+					"pathName": "pages/resultPage/resultPage",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

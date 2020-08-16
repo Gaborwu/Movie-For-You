@@ -1,0 +1,17 @@
+
+<view class="show-frame">
+  <view class="show-image" style="background: url({{movie.poster}})" mode="aspectFit"></view>
+</view>
+
+<view class="show-container">
+  <view class="show-info title">{{movie.movieName}}</view>
+  <view class="show-info"><text class="show-bolder">Director:</text> {{movie.director}}</view>
+  <view class="show-info"><text class="show-bolder">Release Year: </text> {{movie.release_year}}</view>
+  <view class="show-info"><text class="show-bolder">Country: </text> {{movie.country}}</view>
+  <view class="show-info"><text class="show-bolder">Duration: </text> {{movie.duration}}</view>
+</view>
+
+<button type="primary" bindtap="GoBack">Go Back</button>
+
+
+
