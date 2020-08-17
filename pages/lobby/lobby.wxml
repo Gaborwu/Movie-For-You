@@ -3,26 +3,26 @@
 <view>LobbyID:{{lobby.id}}</view>
 <view>Lobby Participants</view>
 <view class="users_container">
-    <view wx:for="{{lobby.users}}">
+    <view wx:for="{{lobby.users}}" class="users">
         <image class="avatar" src="{{item.avatar}}"></image>
         <view class="name">{{item.name}}</view>
     </view>
 </view>
 <!--Render Random Movies-->
 <view class="cards">
-    <view wx:for="{{randomMovies}}" data-id="{{item.id}}">
-        <view style="background: url({{item.poster}}" class="movie">            
+    <view wx:for="{{movies_list}}" data-id="{{item.id}}" class="card">
+        <view style="background: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{item.thumbnail}}'" class="movie">
             <view class="vote-btn {{item.voted ? 'active' : ''}}" bindtap="vote" data-id="{{item.id}}">{{item.voted ? '✓' : ''}}</view>
         </view>
-        <view class="title">{{item.movieName}}</view>
+        <view class="title">{{item.title}}</view>
     </view>
 </view>
 <!-- Buttons -->
 <view class="button">
-<button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn">Join Lobby</button>
-<button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
-<button wx:if="{{user.isParticipant}}" type="primary" open-type="share" class="btn">Share</button>
-<button bindtap="redirectToType" class="startbtn" bindtap="sumbitVoteToLobby">Submit</button>
+    <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn">Join Lobby</button>
+    <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
+    <button wx:if="{{user.isParticipant}}" type="primary" open-type="share" class="btn">Share</button>
+    <button bindtap="redirectToType" class="startbtn" bindtap="sumbitVoteToLobby">Submit</button>
 </view>
 
 <!-- User -->

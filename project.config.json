@@ -85,6 +85,13 @@
 					"pathName": "pages/type/type",
 					"query": "id=5f3764faf0f3b002ed8bff20",
 					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/lobby/lobby",
+					"pathName": "pages/lobby/lobby",
+					"query": "id=5f3a6540f0f3b0373a8716bf",
+					"scene": null
 				}
 			]
 		}
