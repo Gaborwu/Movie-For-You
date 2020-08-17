@@ -13,7 +13,7 @@ Page({
 
         let user = this.data.user;
         
-        user =  { id: user.id, name: user.nickname, avatar: user.avatar };
+        user =  { id: user.id, name: user.nickname, avatar: user.avatar, owner: true };
 
         let users = [user];
 
@@ -78,12 +78,47 @@ Page({
         }
     },
 
+    findWinner: function () {
+        let lobby = this.data.lobby
+         if (lobby.users.length * 2 != lobby.votes.length) {
+            return
+        };
+        let res = []
+        lobby.votes.forEach((e, i) => {
+            let r = res.find(item => item.id == e)
+            if (r != undefined) {
+                r.score += 1
+            } else {
+                r = {}
+                r.id = e
+                r.score = 1
+            }
+            res.push(r)
+        })
+        // console.log(res)
+        // [{id: "5f38f3fe7d4cce06a3e1d020", score: 1}]
+        let winner_id
+        if (res.length == lobby.users.length * 2) {
+            let random = Math.floor(Math.random() * res.length);
+            winner_id = res[random].id
+        } else {
+            winner_id = res.sort(function(a,b) {
+                return a.score - b.score;
+            })[0].id;
+        }
+        console.log(winner_id)
+        let winner_movie = this.data.movies_list.find(item => item.id == winner_id)
+        this.setData({winner_movie: winner_movie})
+    },
+
     checkUserParticipation: function () {
         let user = this.data.user;
         let users = this.data.lobby.users.map(user => user.id);
-
+        let lobby_user = this.data.lobby.users.find(item => item.id == user.id)
+        if (lobby_user.submitted == true) {
+            user['submitted'] = true 
+        }
         user['isParticipant'] = users.includes(this.data.user.id);
-
         this.setData({user});
     },
 
@@ -121,7 +156,7 @@ Page({
     fetchRandomMovies: function () {
         return new Promise(resolve => {
             let Netflix = new wx.BaaS.TableObject('netflix');
-            Netflix.limit(600).find().then(async res => {
+            Netflix.limit(200).find().then(async res => {
                 let movies = res.data.objects;
                 let movie_list = await this.createRandomMovieArray(movies);
                 resolve(movie_list);
@@ -133,15 +168,13 @@ Page({
         return new Promise (resolve => {
             let movies_list = []
             for (let index = 0; index < 6; index++) {
-                const random = Math.floor(Math.random() * movies.length);
+                let random = Math.floor(Math.random() * movies.length);
                 if (movies_list.includes(movies[random])) {
-                    index--;
-                    continue;
-                } else {
-                    movies_list.push(movies[random].id)
-                }
-                resolve(movies_list)
+                    random = Math.floor(Math.random() * movies.length);
+                } 
+                movies_list.push(movies[random].id)
             }
+            resolve(movies_list)
         })
     },
 
@@ -184,12 +217,23 @@ Page({
         let lobby = this.data.lobby;
         let votes = this.data.votes;
         let Lobby = new wx.BaaS.TableObject('lobby');
+        let user = this.data.user;
         Lobby.get(lobby.id).then(res => {
-            console.log(res);
+            // console.log(res);
             let votesArray = res.data.votes
+            let user_votes = res.data.user_votes
+            let lobby_users = res.data.users;
+            // console.log(lobby_users)
+            let lobby_user = res.data.users.find( item => item.id == user.id);
+            // console.log(lobby_user)
+            let lobby_user_index = res.data.users.findIndex((item => item.id === user.id));
+            // console.log(lobby_user_index)
+            lobby_user.submitted = true
+            lobby_users[lobby_user_index] = lobby_user
+            user_votes.push({user_id: user.id, movie_id: votes})
             votes.forEach(vote => votesArray.push(vote));
             let entry = Lobby.getWithoutData(lobby.id);
-            entry.set({votes: votesArray}).update().then(res => {
+            entry.set({votes: votesArray, user_votes: user_votes, users: lobby_users}).update().then(res => {
                 this.setData({lobby: res.data, 'user.voted': true});
             })
         })
