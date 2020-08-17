@@ -1,24 +1,44 @@
 Page({
 
     data: {
-        votes: []
+        votes: [],
+        movies_list: []
     },
 
-    createLobby: function () {
+    createLobby: async function () {
+        wx.showLoading({title: 'Creating Lobby...'});
+
         let Lobby = new wx.BaaS.TableObject('lobby');
         let lobby = Lobby.create();
 
         let user = this.data.user;
+        
         user =  { id: user.id, name: user.nickname, avatar: user.avatar };
 
         let users = [user];
 
-        lobby.set({users}).save().then(res => {
+        let movie_list = await this.fetchRandomMovies();
+
+        lobby.set({users, movie_list}).save().then(async res => {
             lobby = res.data;
+            let movies_list = await this.fetchMovies(lobby);
             user = this.data.user;
             user['isParticipant'] = true;
-            this.setData({lobby, user})
+            this.setData({lobby, user, movies_list});
             this.backgroundRefresh();
+            wx.hideLoading();
+        })
+    },
+
+    fetchMovies: function (lobby) {
+        return new Promise(resolve => {
+            let Netflix = new wx.BaaS.TableObject('netflix');
+            let query = new wx.BaaS.Query();
+            query.in('id', lobby.movie_list);
+            Netflix.setQuery(query).find().then(res => {
+                let movies_list = res.data.objects
+                resolve(movies_list)
+            })
         })
     },
 
@@ -50,6 +70,12 @@ Page({
             this.setData({lobby});
             this.checkUserParticipation();
         })
+        if (this.data.movies_list.length == 0 && this.data.lobby != null) {
+            console.log('get')
+            this.fetchMovies(this.data.lobby).then(res => {
+                this.setData({movies_list: res})
+            });
+        }
     },
 
     checkUserParticipation: function () {
@@ -92,37 +118,33 @@ Page({
         }
     },
 
-    fetchMovies: function () {
-        let Movies = new wx.BaaS.TableObject('movie')
-        let query = new wx.BaaS.Query()
-        Movies.setQuery(query).find().then(res => {
-            console.log(res)
-            let movies = res.data.objects;
-            this.setData({movies})
-            this.randomMovies();
-          })
+    fetchRandomMovies: function () {
+        return new Promise(resolve => {
+            let Netflix = new wx.BaaS.TableObject('netflix');
+            Netflix.limit(600).find().then(async res => {
+                let movies = res.data.objects;
+                let movie_list = await this.createRandomMovieArray(movies);
+                resolve(movie_list);
+              })
+        })
     },
-    randomMovies: function () {
-        let Movies = this.data.movies;   
-        //const random = Math.floor(Math.random() * types.length);
-        let resultArray = []
-        let moviesArray = []
-        for (let index = 0; index < 6; index++) {
-            const random = Math.floor(Math.random() * Movies.length);
-            if(resultArray.includes(random)){
-                console.log("number is already random")
-                index--;
-                continue;
-            }else{
-                resultArray.push(random)
-                moviesArray.push(Movies[random])
+
+    createRandomMovieArray: function (movies) {
+        return new Promise (resolve => {
+            let movies_list = []
+            for (let index = 0; index < 6; index++) {
+                const random = Math.floor(Math.random() * movies.length);
+                if (movies_list.includes(movies[random])) {
+                    index--;
+                    continue;
+                } else {
+                    movies_list.push(movies[random].id)
+                }
+                resolve(movies_list)
             }
-            //console.log(random)
-            let randomMovies = moviesArray
-            this.setData({randomMovies})
-            this.submitMovieList();
-        }
+        })
     },
+
     // submitMovieList: function () {
     //     let movie_list = this.data.randomMovies;
     //     let lobby = this.data.lobby
@@ -135,45 +157,52 @@ Page({
         
     // },
     vote: function (e) {
-        let votes = this.data.votes;
-        let randomMovies = this.data.randomMovies;
-        let id = e.currentTarget.dataset.id;
-        let index = randomMovies.findIndex((item => item.id === id));
-
-        if (votes.includes(id)) {
-            votes.pop(id);
-            randomMovies[index]['voted'] = false;
-            this.setData({votes, randomMovies})
-        } else if (votes.length >= 2) {
-            wx.showToast({title: 'Only two votes!'})
+        let user = this.data.user;
+        if (!user.voted) {
+            let votes = this.data.votes;
+            let movies_list = this.data.movies_list;
+            let id = e.currentTarget.dataset.id;
+            let index = movies_list.findIndex((item => item.id === id));
+    
+            if (votes.includes(id)) {
+                votes.pop(id);
+                movies_list[index]['voted'] = false;
+                this.setData({votes, movies_list})
+            } else if (votes.length >= 2) {
+                wx.showToast({title: 'Only two votes!'})
+            } else {
+                votes.push(id);
+                movies_list[index]['voted'] = true;
+                this.setData({votes, movies_list});
+            }    
         } else {
-            votes.push(id);
-            randomMovies[index]['voted'] = true;
-            this.setData({votes, randomMovies});
-        }    
+            wx.showToast({title: 'You already voted.', icon: 'none'})
+        }
     },
+
     sumbitVoteToLobby: function() {
         let lobby = this.data.lobby;
-        let users = lobby.users;
-        let movies_id = this.data.votes;
-        movies_id = {vote: movies_id}
-        users.push(movies_id)
+        let votes = this.data.votes;
         let Lobby = new wx.BaaS.TableObject('lobby');
-        let entry = Lobby.getWithoutData(lobby.id)
-        entry.set({users}).update().then(
-            console.log ("succeed!")
-        );
-
+        Lobby.get(lobby.id).then(res => {
+            console.log(res);
+            let votesArray = res.data.votes
+            votes.forEach(vote => votesArray.push(vote));
+            let entry = Lobby.getWithoutData(lobby.id);
+            entry.set({votes: votesArray}).update().then(res => {
+                this.setData({lobby: res.data, 'user.voted': true});
+            })
+        })
     },
-
 
     onLoad: async function (options) {
         const id = options && options.id ? options.id : undefined;
         
         await this.getCurrentUser();
-        
         id ? this.backgroundRefresh(id) : this.createLobby();
-        this.fetchMovies();
+        // let movie_list = await this.fetchRandomMovies();
+        // console.log(movie_list)
+        // this.setData({movies_list: movie_list})
     }
 })
 
