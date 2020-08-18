@@ -10,9 +10,9 @@
 </view>
 <!--Render Random Movies-->
 <view class="cards">
-    <view wx:for="{{randomMovies}}" data-id="{{item.id}}">
+    <view wx:for="{{randomMovies}}" data-id="{{item.id}}" bindtap="navigateToMovie">
         <view style="background: url({{item.poster}}" class="movie">            
-            <view class="vote-btn {{item.voted ? 'active' : ''}}" bindtap="vote" data-id="{{item.id}}">{{item.voted ? '✓' : ''}}</view>
+            <view class="vote-btn {{item.voted ? 'active' : ''}}" catchtap="vote" data-id="{{item.id}}">{{item.voted ? '✓' : ''}}</view>
         </view>
         <view class="title">{{item.movieName}}</view>
     </view>

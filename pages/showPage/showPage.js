@@ -1,7 +1,6 @@
 
 Page({
   
-  
   getMovieData: function (id) {
     let tableName = 'movie'
     let Movie = new wx.BaaS.TableObject(tableName)
@@ -17,15 +16,8 @@ Page({
       success: console.log
     })
   },
-  GoBack: function() {
-    wx.navigateTo({
-      url: '../resultPage/resultPage',
-    })
-  },
-  
   onLoad: function (options) {
     let id = options.id;
     this.getMovieData(id);
   }
-
 })

@@ -15,6 +15,7 @@ Page({
         url: '../showPage/showPage',
       })
     },
+    
     onLoad: function(){
       this.getMovieFromBaas()
     }

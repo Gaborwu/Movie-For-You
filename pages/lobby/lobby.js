@@ -36,9 +36,10 @@ Page({
         setInterval(() => this.getLobby(id), 1000, id);
     },
 
-    redirectToType: function() {
-        wx.redirectTo({
-          url: '../type/type',
+    navigateToMovie: function(e) {
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+          url: `../showPage/showPage?id=${id}`,
         })
     },
 
