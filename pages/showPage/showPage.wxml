@@ -8,6 +8,8 @@
   <view class="show-info"><text class="show-bolder">Director:</text> {{movie.director}}</view>
   <view class="show-info"><text class="show-bolder">Release Year: </text> {{movie.release_year}}</view>
   <view class="show-info"><text class="show-bolder">Country: </text> {{movie.country}}</view>
+  <view class="show-info"><text class="show-bolder">Description: </text> </view>
+  <view class="show-info">{{movie.description}}</view>
 </view>
 
 

@@ -12,7 +12,7 @@
 }
 
 .btn {
-  background-color: #6B9AC4;
+  background-color: #A833F0;
   color:  #FBFBFB;
   bottom: 10%;
   position: absolute;
@@ -20,8 +20,10 @@
   border-radius: 4px;
   width: 90% !important;
   height: 80rpx;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
-.buttton_1 {
+.buttton{
+  font-family: Lobster;
   background-color: #6B9AC4;
   color:  #FBFBFB;
   bottom: 20%;
@@ -38,7 +40,7 @@
 
 
 .title {
-  font-family: Dancing Script;
+  font-family: Lobster;
   font-size: 100rpx;
   font-weight: bolder;
   display: flex;

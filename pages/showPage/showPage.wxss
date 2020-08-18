@@ -21,7 +21,7 @@ page {
 
 .show-info {
   color: white;
-  font-size: 40rpx;
+  font-size: 32rpx;
 }
 
 .show-bolder {
@@ -35,7 +35,7 @@ page {
 }
 
 .show-container {
-  padding: 0 32rpx;
+  padding: 0 64rpx;
   font-family: Lato;
   margin-bottom: 32rpx;
 }

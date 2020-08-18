@@ -6,13 +6,7 @@ Page({
   data: {
     
   },
-  importFont: function() {
-    wx.loadFontFace({
-      family: 'Dancing Script',
-      source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k5V0aQMGnkPStxC.ttf")',
-      success: console.log
-    })
-  },
+
   fetchFeedback: function() {
     let Feedback = new wx.BaaS.TableObject('feedback')
     let MyRecord = MyTableObject.create()
@@ -41,10 +35,18 @@ Page({
       url: '/pages/lobby/lobby',
     })
   },
+  importFont: function() {
+    wx.loadFontFace({
+      family: 'Lobster',
+      source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k82NZJYI0HFldqS.ttf")',
+      success: console.log
+    })
+  },
 
   onLoad: function() {
     this.importFont();
     this.getCurrentUser();
+    this.importFont();
   }
 
 })
