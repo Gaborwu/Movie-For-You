@@ -68,7 +68,18 @@ Page({
         let Lobby = new wx.BaaS.TableObject('lobby')
         Lobby.get(id).then(res => {
             let lobby = res.data;
+
             this.setData({lobby});
+
+            let netflix = new wx.BaaS.TableObject('netflix');
+
+            if (lobby.winner) {
+                netflix.get(lobby.winner.id).then(res => {
+                    let winner_movie = res.data;
+                    this.setData({winner_movie});
+                })
+            }
+
             this.checkUserParticipation();
         })
         if (this.data.movies_list.length == 0 && this.data.lobby != null) {
@@ -114,8 +125,15 @@ Page({
             })[0].id;
         }
         console.log(winner_id)
-        let winner_movie = this.data.movies_list.find(item => item.id == winner_id)
-        this.setData({winner_movie: winner_movie})
+
+        let Lobby = new wx.BaaS.TableObject('lobby');
+        let entry = Lobby.getWithoutData(lobby.id);
+
+        let winner_movie = this.data.movies_list.find(item => item.id == winner_id);
+
+        entry.set({ winner: winner_movie.id }).update().then(res => {
+            this.setData({winner_movie: winner_movie})
+        });
     },
 
     checkUserParticipation: function () {
@@ -163,7 +181,7 @@ Page({
     fetchRandomMovies: function () {
         return new Promise(resolve => {
             let Netflix = new wx.BaaS.TableObject('netflix');
-            Netflix.limit(200).find().then(async res => {
+            Netflix.limit(400).find().then(async res => {
                 let movies = res.data.objects;
                 let movie_list = await this.createRandomMovieArray(movies);
                 resolve(movie_list);
@@ -174,7 +192,7 @@ Page({
     createRandomMovieArray: function (movies) {
         return new Promise (resolve => {
             let movies_list = []
-            for (let index = 0; index < 6; index++) {
+            for (let index = movies_list.length; index < 6; index++) {
                 let random = Math.floor(Math.random() * movies.length);
                 if (movies_list.includes(movies[random])) {
                     random = Math.floor(Math.random() * movies.length);
