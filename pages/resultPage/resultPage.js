@@ -10,11 +10,7 @@ Page({
     })
     },
 
-    GoToShow:function(){
-      wx.navigateTo({
-        url: '../showPage/showPage',
-      })
-    },
+
     
     onLoad: function(){
       this.getMovieFromBaas()

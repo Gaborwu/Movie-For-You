@@ -1,11 +1,14 @@
 
 Page({
-  
+  data: {
+    movie: ''
+  },
   getMovieData: function (id) {
-    let tableName = 'movie'
-    let Movie = new wx.BaaS.TableObject(tableName)
-    Movie.get(id).then(res => {
+    let tableName = 'netflix'
+    let Netflix = new wx.BaaS.TableObject(tableName)
+    Netflix.get(id).then(res => {
       let movie = res.data
+      console.log(movie)
       this.setData({movie})
     })
   },

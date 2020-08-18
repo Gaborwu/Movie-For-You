@@ -14,8 +14,8 @@
 <!--Render Random Movies-->
 <view class="cards">
     <view wx:for="{{movies_list}}" data-id="{{item.id}}" class="card">
-        <view style="background: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{item.thumbnail}}'" class="movie">
-            <view class="vote-btn {{item.voted ? 'active' : ''}}" bindtap="vote" data-id="{{item.id}}">{{item.voted ? '✓' : ''}}</view>
+        <view bindtap="GoToShow" data-id="{{item.id}}" style="background: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{item.thumbnail}}' " class="movie" >
+            <view class="vote-btn {{item.voted ? 'active' : ''}}" catchtap="vote" data-id="{{item.id}}">{{item.voted ? '✓' : ''}}</view>
         </view>
         <view class="title">{{item.title}}</view>
     </view>

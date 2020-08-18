@@ -1,6 +1,6 @@
 
 <view class="show-frame">
-  <view class="show-image" style="background: url({{movie.poster}})" mode="aspectFit"></view>
+  <view class="show-image" style="background: url(https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{movie.thumbnail}})"></view>
 </view>
 
 <view class="show-container">
@@ -8,7 +8,6 @@
   <view class="show-info"><text class="show-bolder">Director:</text> {{movie.director}}</view>
   <view class="show-info"><text class="show-bolder">Release Year: </text> {{movie.release_year}}</view>
   <view class="show-info"><text class="show-bolder">Country: </text> {{movie.country}}</view>
-  <view class="show-info"><text class="show-bolder">Duration: </text> {{movie.duration}}</view>
 </view>
 
 

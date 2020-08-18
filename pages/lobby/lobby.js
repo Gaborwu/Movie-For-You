@@ -78,6 +78,12 @@ Page({
             });
         }
     },
+    GoToShow:function(e){
+        const id = e.currentTarget.dataset.id
+        wx.navigateTo({
+          url: '/pages/showPage/showPage?id=' + id,
+        })
+    },
 
     findWinner: function () {
         let lobby = this.data.lobby
@@ -191,6 +197,7 @@ Page({
         
     // },
     vote: function (e) {
+
         let user = this.data.user;
         if (!user.voted) {
             let votes = this.data.votes;
