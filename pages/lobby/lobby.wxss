@@ -2,6 +2,7 @@
 page {
     background-color: #0F100F;
     color: #FBFBFB;
+    padding-bottom: 60px;
 }
 .avatar {
     border-radius: 50%;
@@ -52,12 +53,28 @@ page {
 .submitbtn {
     background-color: white; 
     color: #A833F0;
-    margin-left: 8rpx;
+    margin-left: 20px !important;
 }
-.button {
+.avatarshadow {
+    border-radius: 50%;
+    border: 6rpx solid #A833F0;
+}
+.winnerbtn {
+    margin-top: 16rpx;
+}
+.bottombar {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16rpx;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #0F100F;
+    padding: 16px;
+}
+.winnerbtn {
+    color: white;
+    background-color: #A833F0 !important;
 }
 .title {
     font-size: 30rpx;
@@ -88,4 +105,9 @@ page {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.poster {
+    margin-top: 32rpx;
+    display: flex;
+    justify-content: center;
 }

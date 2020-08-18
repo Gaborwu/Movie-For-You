@@ -1,15 +1,24 @@
 <!--pages/lobby/lobby.wxml-->
-<view>Lobby Status: Voting!</view>
-<view>LobbyID:{{lobby.id}}</view>
-<view class="subTitle">Lobby Participants</view>
-<view class="users_container">
-    <view wx:for="{{lobby.users}}" class="users">
-        <image class="avatar" src="{{item.avatar}}"></image>
-        <view class="name">{{item.name}}</view>
-        <view class="name" wx:if="{{item.submitted}}">Voted ✓</view>
+<block wx:if="{{!winner_movie}}">
+    <view>Lobby Status: Voting!</view>
+    <view>LobbyID:{{lobby.id}}</view>
+    <view class="subTitle">Lobby Participants</view>
+    <view class="users_container">
+        <view wx:for="{{lobby.users}}" class="users">
+            <block wx:if="{{item.submitted}}">
+                <image class="avatar avatarshadow" src="{{item.avatar}}"></image>
+                <view class="name">{{item.name}}</view>
+                <view class="name">Voted ✓</view>
+            </block>
+            <block wx:else>
+                <image class="avatar" src="{{item.avatar}}"></image>
+                <view class="name">{{item.name}}</view>
+            </block>
+        </view>
     </view>
-</view>
-<view class="bottomLine"></view>
+    <view class="bottomLine"></view>
+<button class="winnerbtn" wx:if="{{lobby.users[0].id == user.id}}" bindtap="findWinner">Winner Movie</button>
+
 
 <!--Render Random Movies-->
 <view class="cards">
@@ -21,19 +30,44 @@
     </view>
 </view>
 <!-- Buttons -->
-<view class="button">
+<view class="bottombar">
     <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn">Join Lobby</button>
     <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
     <button wx:if="{{user.isParticipant}}" type="primary" open-type="share" class="btn">Share</button>
     <block wx:if="{{user.submitted && user.isParticipant}}">
-        <button class="startbtn" >Submitted</button>
+        <button class="submitbtn" >Submitted</button>
     </block>
     <block wx:if="{{!user.submitted && user.isParticipant}}">
-        <button class="startbtn" bindtap="sumbitVoteToLobby">Submit</button>
+        <button class="submitbtn" bindtap="sumbitVoteToLobby">Submit</button>
     </block>
 </view>
-<button class="btn" wx:if="{{lobby.users[0].id == user.id}}" bindtap="findWinner">Get Your Recommendation</button>
-<view>{{winner_movie.title}}</view>
+</block>
+
+<block wx:if="{{winner_movie}}">
+    <view>Lobby Status: All Submitted!</view>
+    <view>LobbyID:{{lobby.id}}</view>
+    <view class="subTitle">Lobby Participants</view>
+     <view class="users_container">
+        <view wx:for="{{lobby.users}}" class="users">
+                <image class="avatar avatarshadow" src="{{item.avatar}}"></image>
+                <view class="name">{{item.name}}</view>
+                <view class="name">Voted ✓</view>
+        </view>
+    </view>
+    <view class="bottomLine"></view>
+    <view class="winnermovie">
+    <view class="poster">
+        <image src="https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{winner_movie.thumbnail}}"></image>
+    </view>
+        <view>{{winner_movie.title}}</view>
+        <view>Cast:{{winner_movie.cast}}</view>
+
+    </view>
+    
+    <button type="primary" open-type="share" class="btn">Share</button>
+
+</block>
+
 
 <!-- User -->
 
