@@ -174,9 +174,25 @@ Page({
         return {
             title: "Let's Netflix and Chill",
             path: `pages/lobby/lobby?id=${id}`,
-            imageUrl: 'https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k5V1CDOoCY9ZknJ.png'
+            imageUrl: 'https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k81nMfmN1HSab8S.jpg'
         }
     },
+
+    importFont: function() {
+        wx.loadFontFace({
+          family: 'ShadowsIntoLight',
+          source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k81zpMB7iJxdrMb.ttf")',
+        })
+      },
+
+      importFont_2: function() {
+        wx.loadFontFace({
+          family: 'Alata',
+          source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k826hUnKwIKozur.ttf")',
+        })
+      },
+
+      
 
     fetchRandomMovies: function () {
         return new Promise(resolve => {
@@ -270,6 +286,9 @@ Page({
         
         await this.getCurrentUser();
         id ? this.backgroundRefresh(id) : this.createLobby();
+        this.importFont ();
+        this.importFont_2 ();
+
         // let movie_list = await this.fetchRandomMovies();
         // console.log(movie_list)
         // this.setData({movies_list: movie_list})
