@@ -9,8 +9,12 @@ page {
     height: 120rpx;
     width: 120rpx;
 }
+.margintop20 {
+    margin-top: 20rpx;
+}
 .subTitle {
-    margin: 16rpx;
+    margin: 0rpx 24rpx;
+    font-family: Alata;
 }
 .user_container {
     display: flex;
@@ -25,6 +29,7 @@ page {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 8rpx;
     margin-bottom: 16rpx;
 }
 .name {
@@ -38,6 +43,9 @@ page {
     height: 400rpx;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);   
     position: relative;
+  }
+  .movieContainer {
+      margin-top: 32rpx;
   }
 .cards {
     display: grid;
@@ -55,12 +63,23 @@ page {
     color: #A833F0;
     margin-left: 20px !important;
 }
+.status {
+    font-family: ShadowsIntoLight;
+    display: flex;
+    justify-content: center;
+    font-size: 48rpx;
+    color: #A833F0;
+    margin-top: 8rpx;
+}
 .avatarshadow {
     border-radius: 50%;
     border: 6rpx solid #A833F0;
 }
 .winnerbtn {
     margin-top: 16rpx;
+}
+.winner {
+    margin-top: 0rpx !important;
 }
 .bottombar {
     display: flex;
@@ -106,6 +125,24 @@ page {
     flex-direction: column;
     align-items: center;
 }
+.winner_user {
+    margin-top: 16rpx;
+}
+.movie_imformation {
+    margin: 50rpx ;
+}
+.movieTitle {
+    display: flex;
+    justify-content: center;
+    font-size: 40rpx;
+    font-weight: bolder;
+    color: #FBFBFB;
+}
+
+.bold {
+    font-weight: bolder;
+}
+
 .poster {
     margin-top: 32rpx;
     display: flex;

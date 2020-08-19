@@ -1,8 +1,6 @@
 <!--pages/lobby/lobby.wxml-->
 <block wx:if="{{!winner_movie}}">
-    <view>Lobby Status: Voting!</view>
-    <view>LobbyID:{{lobby.id}}</view>
-    <view class="subTitle">Lobby Participants</view>
+    <view class="status">Let's Vote!</view>
     <view class="users_container">
         <view wx:for="{{lobby.users}}" class="users">
             <block wx:if="{{item.submitted}}">
@@ -16,7 +14,6 @@
             </block>
         </view>
     </view>
-    <view class="bottomLine"></view>
 <button class="winnerbtn" wx:if="{{lobby.users[0].id == user.id}}" bindtap="findWinner">Winner Movie</button>
 
 
@@ -44,23 +41,33 @@
 </block>
 
 <block wx:if="{{winner_movie}}">
-    <view>Lobby Status: All Submitted!</view>
-    <view>LobbyID:{{lobby.id}}</view>
-    <view class="subTitle">Lobby Participants</view>
-     <view class="users_container">
-        <view wx:for="{{lobby.users}}" class="users">
+     <view class="users_container margintop20">
+        <view wx:for="{{lobby.users}}" class="users winner_user">
                 <image class="avatar avatarshadow" src="{{item.avatar}}"></image>
                 <view class="name">{{item.name}}</view>
                 <view class="name">Voted ✓</view>
         </view>
     </view>
-    <view class="bottomLine"></view>
+    <view  class="status winner">The Winner is ...</view>
+
     <view class="winnermovie">
     <view class="poster">
         <image src="https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{winner_movie.thumbnail}}"></image>
     </view>
-        <view>{{winner_movie.title}}</view>
-        <view>Cast:{{winner_movie.cast}}</view>
+    <view class="movie_imformation">
+        <view  class="movieTitle">{{winner_movie.title}} 
+        </view>
+        <view class="movieContianer"> 
+            <view>Release Year: {{winner_movie.release_year}}</view>
+            <view class="bold">Description  </view> 
+                 <view>{{winner_movie.description}}</view>            
+           
+            <!-- <view class="rating">{{winner_movie.rating}}</view> -->
+           
+             <!-- <view class="movieInformation">Cast: {{winner_movie.cast}}</view> -->
+        </view>
+       
+    </view>
 
     </view>
     
