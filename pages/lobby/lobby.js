@@ -22,8 +22,9 @@ Page({
         lobby.set({users, movie_list}).save().then(async res => {
             lobby = res.data;
             let movies_list = await this.fetchMovies(lobby);
-            user = this.data.user;
+            
             user['isParticipant'] = true;
+            
             this.setData({lobby, user, movies_list});
             this.backgroundRefresh();
             wx.hideLoading();
@@ -34,7 +35,9 @@ Page({
         return new Promise(resolve => {
             let Netflix = new wx.BaaS.TableObject('netflix');
             let query = new wx.BaaS.Query();
+            
             query.in('id', lobby.movie_list);
+            
             Netflix.setQuery(query).find().then(res => {
                 let movies_list = res.data.objects
                 resolve(movies_list)
@@ -46,7 +49,7 @@ Page({
         return new Promise(resolve => {
             wx.BaaS.auth.getCurrentUser().then(user => {
                 this.setData({user});
-                resolve(user);
+                resolve();
             })
         })
     },
@@ -65,30 +68,23 @@ Page({
 
     getLobby: function (id) {
         id = this.data.lobby && this.data.lobby.id ? this.data.lobby.id : id;
+        
         let Lobby = new wx.BaaS.TableObject('lobby')
-        Lobby.get(id).then(res => {
+        
+        Lobby.expand(['winner']).get(id).then(res => {
             let lobby = res.data;
-
             this.setData({lobby});
-
-            let netflix = new wx.BaaS.TableObject('netflix');
-
-            if (lobby.winner) {
-                netflix.get(lobby.winner.id).then(res => {
-                    let winner_movie = res.data;
-                    this.setData({winner_movie});
-                })
-            }
-
             this.checkUserParticipation();
         })
-        if (this.data.movies_list.length == 0 && this.data.lobby != null) {
-            console.log('get')
-            this.fetchMovies(this.data.lobby).then(res => {
-                this.setData({movies_list: res})
-            });
-        }
+        
+        // if (this.data.movies_list.length == 0 && this.data.lobby != null) {
+        //     console.log('get')
+        //     this.fetchMovies(this.data.lobby).then(res => {
+        //         this.setData({movies_list: res})
+        //     });
+        // }
     },
+
     GoToShow:function(e){
         const id = e.currentTarget.dataset.id
         wx.navigateTo({
@@ -153,6 +149,12 @@ Page({
             this.addUserToLobby();
         })
       },
+      navigateToUserPage: function () {
+        let id = this.data.user.id
+        wx.navigateTo({
+          url: '../user/user?id=${id}`',
+        })
+      },
 
     addUserToLobby: function () {
         let lobby = this.data.lobby;
@@ -183,17 +185,13 @@ Page({
           family: 'ShadowsIntoLight',
           source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k81zpMB7iJxdrMb.ttf")',
         })
-      },
 
-      importFont_2: function() {
         wx.loadFontFace({
-          family: 'Alata',
-          source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k826hUnKwIKozur.ttf")',
-        })
+            family: 'Alata',
+            source: 'url("https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k826hUnKwIKozur.ttf")',
+          })
       },
-
       
-
     fetchRandomMovies: function () {
         return new Promise(resolve => {
             let Netflix = new wx.BaaS.TableObject('netflix');
@@ -219,17 +217,6 @@ Page({
         })
     },
 
-    // submitMovieList: function () {
-    //     let movie_list = this.data.randomMovies;
-    //     let lobby = this.data.lobby
-    //     let Lobby = new wx.BaaS.TableObject('lobby');
-    //     let entry = Lobby.getWithoutData(lobby.id);
-    //     entry.set(movie_list).update().then( res=> {
-    //         console.log(res)
-    //     }
-    //     );
-        
-    // },
     vote: function (e) {
 
         let user = this.data.user;
@@ -283,22 +270,10 @@ Page({
 
     onLoad: async function (options) {
         const id = options && options.id ? options.id : undefined;
+        this.importFont();
         
         await this.getCurrentUser();
-        id ? this.backgroundRefresh(id) : this.createLobby();
-        this.importFont ();
-        this.importFont_2 ();
 
-        // let movie_list = await this.fetchRandomMovies();
-        // console.log(movie_list)
-        // this.setData({movies_list: movie_list})
+        id ? this.backgroundRefresh(id) : this.createLobby();
     }
 })
-
-// 1. Start styling the lobby page
-// 2. Hardcode an array of movies for users to vote on. 
-// 3. Add that as a data point in your lobby object in local data
-// 4. As a user, I can see 6 movies in the lobby
-// 5. As a user, I can vote on 2 movies
-// 6. As an owner, I can stop the voting || As a user, I can see a countdown of when voting ends
-// 7. As a user, I can see more details about a movie

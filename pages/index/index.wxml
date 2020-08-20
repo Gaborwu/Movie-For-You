@@ -1,5 +1,8 @@
-<view class="index-container">
+<view class="index__container">
   <view class="title">Movie For You</view>
-  <button wx:if="{{!user.nickname}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Enter the Lobby</button>
-  <button wx:else bindtap="redirectToLobby" class="btn">Enter the Lobby</button>
+  <view class="subtitle">Vote with your friends, to find the best movie to watch tonight!</view>
+  
+  <view class="btn-container">
+    <button bindtap="redirectToLobby" class="btn btn-primary">Enter the Lobby</button>
+  </view>
 </view>

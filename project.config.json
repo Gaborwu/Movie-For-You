@@ -99,6 +99,13 @@
 					"pathName": "pages/showPage/showPage",
 					"query": "id=5f38f3fe7d4cce06a3e1d01d",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/user",
+					"pathName": "pages/user/user",
+					"query": "id=5f3bc0fbf0f3b060b087179b",
+					"scene": null
 				}
 			]
 		}
