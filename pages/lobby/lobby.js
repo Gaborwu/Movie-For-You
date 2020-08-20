@@ -108,14 +108,12 @@ Page({
             }
             res.push(r)
         })
-        // console.log(res)
-        // [{id: "5f38f3fe7d4cce06a3e1d020", score: 1}]
         let winner_id
         if (res.length == lobby.users.length * 2) {
             let random = Math.floor(Math.random() * res.length);
             winner_id = res[random].id
         } else {
-            winner_id = res.sort(function(a,b) {
+            winner_id = res.sort(function(a, b) {
                 return a.score - b.score;
             })[0].id;
         }
@@ -127,7 +125,7 @@ Page({
         let winner_movie = this.data.movies_list.find(item => item.id == winner_id);
 
         entry.set({ winner: winner_movie.id }).update().then(res => {
-            this.setData({winner_movie: winner_movie})
+            this.setData({'lobby.winner': winner_movie});
         });
     },
 
