@@ -38,9 +38,9 @@
     
 
         <view class="bottom">
-            <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
+            <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn joinlobbybtn">Join Lobby</button>
 
-            <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary" >Join Lobby</button>
+            <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary joinlobbybtn" >Join Lobby</button>
 
             <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
 
@@ -62,7 +62,7 @@
         <view class="movieContianer"> 
             <view>Release Year: {{lobby.winner.release_year}}</view>
             <view class="bold">Description:  </view> 
-                 <view>{{winner_movie.description}}</view>            
+                 <view>{{lobby.winner.description}}</view>            
            
             <!-- <view class="rating">{{winner_movie.rating}}</view> -->
            

@@ -112,6 +112,9 @@ page {
     margin-bottom: 32rpx !important;
     width: 65% !important;
 }
+.joinlobbybtn {
+    width: 90%;
+}
 .users {
     display: flex;
     flex-direction: column;

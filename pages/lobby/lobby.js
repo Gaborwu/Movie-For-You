@@ -77,12 +77,11 @@ Page({
             this.checkUserParticipation();
         })
         
-        // if (this.data.movies_list.length == 0 && this.data.lobby != null) {
-        //     console.log('get')
-        //     this.fetchMovies(this.data.lobby).then(res => {
-        //         this.setData({movies_list: res})
-        //     });
-        // }
+        if (this.data.movies_list.length == 0 && this.data.lobby != null) {
+            this.fetchMovies(this.data.lobby).then(res => {
+                this.setData({movies_list: res})
+            });
+        }
     },
 
     GoToShow:function(e){
