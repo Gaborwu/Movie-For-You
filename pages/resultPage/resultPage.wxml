@@ -1,3 +1,0 @@
-<view wx:for="{{movies}}" class="container">
-  <image class="img" src="{{item.poster}}" mode="aspectFit" bindtap="GoToShow"></image>
-</view>

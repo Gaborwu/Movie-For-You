@@ -9,8 +9,12 @@ page {
     height: 120rpx;
     width: 120rpx;
 }
+.margintop20 {
+    margin-top: 20rpx;
+}
 .subTitle {
-    margin: 16rpx;
+    margin: 0rpx 24rpx;
+    font-family: Alata;
 }
 .user_container {
     display: flex;
@@ -25,6 +29,7 @@ page {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 8rpx;
     margin-bottom: 16rpx;
 }
 .name {
@@ -39,6 +44,11 @@ page {
     box-shadow: 0 0 15px rgba(0,0,0,0.2);   
     position: relative;
   }
+
+  .movieContainer {
+    margin-top: 32rpx;
+  }
+  
 .cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -46,55 +56,45 @@ page {
     grid-column-gap: 48rpx;
     margin: 24rpx;
 }
-.btn {
-    color: white;
-    background-color: #A833F0 !important;
-}
-.submitbtn {
-    background-color: white; 
+
+.status {
+    font-family: ShadowsIntoLight;
+    display: flex;
+    justify-content: center;
+    font-size: 48rpx;
     color: #A833F0;
-    margin-left: 20px !important;
+    margin-top: 8rpx;
 }
+
 .avatarshadow {
     border-radius: 50%;
     border: 6rpx solid #A833F0;
 }
-.winnerbtn {
-    margin-top: 16rpx;
-}
-.bottombar {
+
+.winner-container .poster {
+    margin-top: 32rpx;
     display: flex;
-    justify-content: space-between;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #0F100F;
-    padding: 16px;
+    justify-content: center;
+    align-items: center;
 }
+
+.winner-container .poster image {
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
+.winner {
+    margin-top: 0rpx !important;
+}
+
 .winnerbtn {
     color: white;
     background-color: #A833F0 !important;
 }
+
 .title {
     font-size: 30rpx;
     margin-left: 8rpx;
-}
-
-.vote-btn {
-    position: absolute; 
-    top: 16rpx;
-    right: 16rpx;
-    border: 2px solid #A833F0;
-    height: 64rpx;
-    width: 64rpx;
-    box-sizing: border-box;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 48rpx;
 }
 
 .active {
@@ -106,8 +106,29 @@ page {
     flex-direction: column;
     align-items: center;
 }
-.poster {
-    margin-top: 32rpx;
+
+.user {
+    height: 100rpx;
+    width: 100rpx;
+    margin-top: 16rpx;
+}
+
+.winner_user {
+    margin-top: 16rpx;
+}
+
+.movie_imformation {
+    margin: 50rpx ;
+}
+
+.movieTitle {
     display: flex;
     justify-content: center;
+    font-size: 40rpx;
+    font-weight: bolder;
+    color: #FBFBFB;
+}
+
+.bold {
+    font-weight: bolder;
 }
