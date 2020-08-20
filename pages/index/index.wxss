@@ -1,13 +1,11 @@
 
 .index__container {
   color: #FBFBFB;
-<<<<<<< HEAD
   background-image: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k8ZbS29P88KQLLB.jpeg');
   display: flex;
+  flex-direction: column;
   justify-content: center;
-=======
   text-align: center;
->>>>>>> dcf707e60beea1d4a4faea4de345df0985e5ba97
   height: 100vh;
   background-position: center;
 }

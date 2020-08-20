@@ -88,7 +88,7 @@ Page({
     GoToShow:function(e){
         const id = e.currentTarget.dataset.id
         wx.navigateTo({
-          url: '/pages/showPage/showPage?id=' + id,
+          url: '/pages/show/show?id=' + id,
         })
     },
 

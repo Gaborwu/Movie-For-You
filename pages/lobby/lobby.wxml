@@ -18,7 +18,12 @@
     <view class="cards">
         <view wx:for="{{movies_list}}" data-id="{{item.id}}" class="card">
             <view bindtap="GoToShow" data-id="{{item.id}}" style="background: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{item.thumbnail}}' " class="movie" >
-                <view class="vote-btn {{item.voted ? 'active' : ''}}" catchtap="vote" data-id="{{item.id}}">{{item.voted ? '✓' : ''}}</view>
+                <view class="vote-btn {{ item.voted ? 'active': '' }}" catchtap="vote"  data-id="{{item.id}}">
+                    <icon type="{{item.voted ? 'success': 'circle'}}" size="40" color="{{item.voted ? '#A833F0' : ''}}"></icon>
+                </view>
+
+
+                <!-- <view >{{item.voted ? '✓' : ''}}</view> -->
             </view>
             <view class="title">{{item.title}}</view>
         </view>
@@ -36,7 +41,7 @@
 
             <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary" >Join Lobby</button>
 
-            <button wx:if="{{user.isParticipant}}" type="primary" open-type="share" class="btn btn-share" >Share</button>
+            <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
 
             <button wx:if="{{!user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" disabled="{{user.voted}}">Submit</button>
         </view>

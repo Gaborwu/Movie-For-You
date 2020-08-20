@@ -10,7 +10,7 @@ page {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 64rpx 32rpx;
+    padding: 32rpx 32rpx;
     box-sizing: border-box;
   }
 
@@ -27,7 +27,7 @@ page {
   }
 
   .btn-container .bottom .btn {
-      width: 45% !important;
+      width: 47.5% !important;
   }
   
   .btn-primary {
@@ -46,6 +46,7 @@ page {
   }
   
   .btn {
+    margin: 0 !important;
     border-radius: 4px;
     width: 100% !important;
     height: 80rpx;

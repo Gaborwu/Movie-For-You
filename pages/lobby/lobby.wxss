@@ -97,9 +97,7 @@ page {
     margin-left: 8rpx;
 }
 
-.active {
-    background: #A833F0;
-}
+
 
 .users {
     display: flex;
@@ -131,4 +129,17 @@ page {
 
 .bold {
     font-weight: bolder;
+}
+
+.vote-btn {
+    right: 10rpx;
+    top: 10rpx;
+    position: absolute;
+    display: flex;
+    border-radius: 50%;
+}
+
+.vote-btn.active {
+    background: #fff;
+    border-radius: 50%;
 }
