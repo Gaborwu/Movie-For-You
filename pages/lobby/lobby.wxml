@@ -45,8 +45,8 @@
             <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
 
             <button wx:if="{{!user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" >Submit</button>
+            
             <button wx:if="{{user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" >Submitted</button>
-
         </view>
     </view>
 </block>
