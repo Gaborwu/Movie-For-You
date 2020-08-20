@@ -1,14 +1,9 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/list/list",
     "pages/lobby/lobby",
-    "pages/type/type",
-    "pages/duration/duration",
-    "pages/showPage/showPage",
-    "pages/resultPage/resultPage"
-
-   
+    "pages/show/show",
+    "pages/user/user"
   ],
   "window":{
     "backgroundTextStyle":"light",

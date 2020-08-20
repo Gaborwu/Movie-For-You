@@ -1,50 +1,19 @@
-/**index.wxss**/
 
-
-.index-container {
-  background-color: #0F100F;
+.index__container {
   color: #FBFBFB;
-  background-image: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k5V1CDOoCY9ZknJ.png');
-  display: flex;
-  justify-content: center;
+  text-align: center;
   height: 100vh;
   background-position: center;
 }
 
-.btn {
-  background-color: #A833F0;
-  color:  #FBFBFB;
-  bottom: 10%;
-  position: absolute;
-  transition: background 0.3s ease;
-  border-radius: 4px;
-  width: 90% !important;
-  height: 80rpx;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-}
-.buttton{
-  font-family: Lobster;
-  background-color: #6B9AC4;
-  color:  #FBFBFB;
-  bottom: 20%;
-  position: absolute;
-  transition: background 0.3s ease;
-  border-radius: 4px;
-  width: 90% !important;
-  height: 80rpx;
-}
-.btn hover {
-  background: #1BCB7F;
-  color: white;
-}
-
-
 .title {
   font-family: Lobster;
-  font-size: 100rpx;
+  font-size: 96rpx;
   font-weight: bolder;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 15%;
+  padding-top: 240rpx;
+}
+
+.subtitle {
+  font-size: 36rpx;
+  padding-top: 80rpx;
 }
