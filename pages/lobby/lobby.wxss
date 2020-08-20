@@ -90,15 +90,28 @@ page {
 .winnerbtn {
     color: white;
     background-color: #A833F0 !important;
+    width: 60% !important;
+}
+.btnarea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
     font-size: 30rpx;
     margin-left: 8rpx;
 }
-
-
-
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.voteAgainBtn {
+    color: #A833F0;
+    margin-bottom: 32rpx !important;
+    width: 65% !important;
+}
 .users {
     display: flex;
     flex-direction: column;

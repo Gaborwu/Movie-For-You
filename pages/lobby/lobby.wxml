@@ -13,7 +13,11 @@
     </view>
 </view>
 
+
 <block wx:if="{{!lobby.winner}}">
+    <view class="btnarea">
+     <button class="btn btn-primary winnerbtn" wx:if="{{lobby.users[0].id == user.id}}" bindtap="findWinner">Calculate Winner</button>
+     </view>
     <!--Render Random Movies-->
     <view class="cards">
         <view wx:for="{{movies_list}}" data-id="{{item.id}}" class="card">
@@ -31,10 +35,7 @@
 
 <!-- Buttons -->
     <view class="btn-container">
-        
-        <view class="top">
-            <button class="btn btn-primary" wx:if="{{lobby.users[0].id == user.id}}" bindtap="findWinner">Calculate Winner</button>
-        </view>
+    
 
         <view class="bottom">
             <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn">Join Lobby</button>
@@ -43,7 +44,9 @@
 
             <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
 
-            <button wx:if="{{!user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" disabled="{{user.voted}}">Submit</button>
+            <button wx:if="{{!user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" >Submit</button>
+            <button wx:if="{{user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" >Submitted</button>
+
         </view>
     </view>
 </block>
@@ -69,8 +72,8 @@
     </view>
     </view>
     <view class="btn-container">
-        <button class="btn btn-primary">Vote Again</button>
-        <button bindtap="navigateToUserPage" class="btn btn-submit">Watched List</button>
+        <button class="btn voteAgainBtn" bindtap="navigateToLanding">Vote Again</button>
+        <!-- <button bindtap="navigateToUserPage" class="btn btn-submit">Watched List</button> -->
     </view>
 </block>
 

@@ -41,7 +41,7 @@ page {
   }
 
   .btn-submit {
-    background: #62DDF5;
+    background: #A833F0;
     color: white;
   }
   

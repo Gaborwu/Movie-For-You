@@ -241,7 +241,12 @@ Page({
             wx.showToast({title: 'You already voted.', icon: 'none'})
         }
     },
-
+    navigateToLanding: function () {
+        wx.redirectTo({
+          url: '../index/index',
+         
+        })
+    },
     sumbitVoteToLobby: function() {
         let lobby = this.data.lobby;
         let votes = this.data.votes;
