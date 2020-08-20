@@ -21,3 +21,11 @@
   font-size: 36rpx;
   text-shadow: yellow 1px 0 10px;
 }
+
+.btn {
+  margin: 80rpx !important;
+  border-radius: 4px;
+  width: 80% !important;
+  height: 80rpx;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
