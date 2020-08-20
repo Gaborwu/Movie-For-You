@@ -59,7 +59,7 @@
         </view>
         <view class="movieContianer"> 
             <view>Release Year: {{winner_movie.release_year}}</view>
-            <view class="bold">Description  </view> 
+            <view class="bold">Description:  </view> 
                  <view>{{winner_movie.description}}</view>            
            
             <!-- <view class="rating">{{winner_movie.rating}}</view> -->
