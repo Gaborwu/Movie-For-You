@@ -1,1 +1,11 @@
-<image class="avatar" src="{{user.avatar}}"></image>
+<view class="user__container">
+    <image class="avatar" src="{{user.avatar}}"/>
+    <view class="name">{{user.nickname}}</view>
+
+    <view class="btn-container" style="position: absolute; bottom: 0;">
+        <button wx:if="{{!user.nickname}}" open-type="getUserInfo" open-type="getUserInfo" type="primary" bindgetuserinfo="userInfoHandler">Login</button>
+    
+        <button wx:else bindtap="logout" type="warn">Logout</button>
+    </view>
+</view>
+

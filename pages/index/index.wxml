@@ -4,4 +4,5 @@
   <view class="btn-container" style="position: absolute; bottom: 0;">
     <view bindtap="redirectToLobby" class="btn btn-primary" >Enter the Lobby</view>
   </view>
+  <view bindtap="navigateToUser" class="btn-user">User</view>
 </view>

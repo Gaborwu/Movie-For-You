@@ -12,14 +12,10 @@
 
 
 <block wx:if="{{!lobby.winner}}">
-    <view class="btnarea">
-     
-     </view>
-    <!--Render Random Movies-->
     <view class="cards">
         <view wx:for="{{movies_list}}" data-id="{{item.id}}" class="card">
-            <view bindtap="GoToShow" data-id="{{item.id}}" style="background: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{item.thumbnail}}' " class="movie" >
-                <view class="vote-btn {{ item.voted ? 'active': '' }}" catchtap="vote"  data-id="{{item.id}}">
+            <view bindtap="navigateToShow" data-id="{{item.id}}" style="background: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{item.thumbnail}}' " class="movie" >
+                <view wx:if="{{user.isParticipant}}" class="vote-btn {{ item.voted ? 'active': '' }}" catchtap="vote"  data-id="{{item.id}}">
                     <icon type="{{item.voted ? 'success': 'circle'}}" size="40" color="{{item.voted ? '#A833F0' : ''}}"></icon>
                 </view>
             </view>
@@ -27,43 +23,52 @@
         </view>
     </view>
 
-<!-- Buttons -->
     <view class="btn-container" style="position: fixed; bottom: 0;">
-            
+
+        <!-- If user is NOT logged in, and NOT a participant -->
         <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn btn-primary">Join Lobby</button>
 
-        <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary joinlobbybtn" >Join Lobby</button>
+        <!-- If user is NOT logged in, and IS a participant -->
+        <button wx:if="{{!user.nickname && user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn btn-share">Login</button>
+        
+        <!-- If user IS logged in, and NOT a participant -->
+        <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary">Join Lobby</button>
 
-        <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
+        <!-- If user IS logged in, and IS a participant -->
+        <button wx:if="{{user.nickname && user.isParticipant}}" open-type="share" class="btn btn-share">Share</button>
 
-        <button wx:if="{{!user.submitted && user.isParticipant && votes.length === 2 && !user.voted}}" class="btn btn-submit" bindtap="sumbitVoteToLobby">Submit</button>
+        <!-- If user IS logged in, IS a participant, HAS NOT voted, and CAN submit -->
+        <button wx:if="{{user.nickname && user.isParticipant && !user.submitted && votes.length === 2}}" class="btn btn-submit" bindtap="sumbitVoteToLobby">Submit</button>
 
-        <button class="btn btn-primary" wx:if="{{lobby.users[0].id === user.id && lobby.votes.length / 2 === lobby.users.length}}" bindtap="findWinner">Calculate</button>
+        <!-- If user IS logged in, user IS the owner, and lobby users have ALL voted -->
+        <button class="btn btn-primary" wx:if="{{user.nickname && lobby.users[0].id === user.id && lobby.votes.length / 2 === lobby.users.length}}" bindtap="findWinner">Calculate</button>
     </view>
 </block>
 
+<!-- Winner Page Render -->
+
 <block wx:if="{{lobby.winner}}">
-    <view class="winner-container">
-        <view class="poster">
-            <image mode="aspectFill" src="https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{lobby.winner.thumbnail}}"></image>
-        </view>
-    <view class="movie_imformation">
-        <view  class="movieTitle">{{lobby.winner.title}} 
-        </view>
-        <view class="movieContianer"> 
-            <view>Release Year: {{lobby.winner.release_year}}</view>
-            <view class="bold">Description:  </view> 
-                 <view>{{lobby.winner.description}}</view>            
-           
-            <!-- <view class="rating">{{winner_movie.rating}}</view> -->
-           
-             <!-- <view class="movieInformation">Cast: {{winner_movie.cast}}</view> -->
-        </view>
-       
+    <view class="show__image-container">
+        <view class="image" style="background: url(https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{lobby.winner.thumbnail}})"/>
     </view>
+    <view class="show__info-container">
+        <!-- Title -->
+        <view class="header">{{lobby.winner.title}}</view>            
+        
+        <!-- Tags -->
+        <view class="flex-content-between">
+            <view class="subtitle">{{lobby.winner.rating}}</view>
+            <view class="subtitle">{{lobby.winner.release_year}}</view>                <view class="subtitle">{{lobby.winner.type}}</view>
+        </view>
+        
+        <!-- Description -->
+        <view class="body"> 
+            <view>{{lobby.winner.description}}</view>
+        </view>
     </view>
+    
+    <!-- Button Container -->
     <view class="btn-container">
-        <button class="btn voteAgainBtn" bindtap="navigateToLanding">Vote Again</button>
-        <!-- <button bindtap="navigateToUserPage" class="btn btn-submit">Watched List</button> -->
+        <button wx:if="{{lobby.winner}}"class="btn voteAgainBtn" bindtap="navigateToLanding">Vote Again</button>
     </view>
 </block>
