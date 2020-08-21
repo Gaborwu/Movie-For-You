@@ -1,15 +1,20 @@
 
-<view class="show-frame">
-  <view class="show-image" style="background: url(https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{movie.thumbnail}})"></view>
+<view class="show__image-container">
+  <view class="image" style="background: url(https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{movie.thumbnail}})"></view>
 </view>
-
-<view class="show-container">
-  <view class="show-info title">{{movie.movieName}}</view>
-  <view class="show-info"><text class="show-bolder">Director:</text> {{movie.director}}</view>
-  <view class="show-info"><text class="show-bolder">Release Year: </text> {{movie.release_year}}</view>
-  <view class="show-info"><text class="show-bolder">Country: </text> {{movie.country}}</view>
-  <view class="show-info"><text class="show-bolder">Description: </text> </view>
-  <view class="show-info">{{movie.description}}</view>
+<view class="show__info-container">
+  <!-- Title -->
+  <view class="header">{{movie.title}}</view>
+  
+  <!-- Tags -->
+  <view class="flex-content-between">
+    <view class="subtitle">{{movie.rating}}</view>
+    <view class="subtitle">{{movie.release_year}}</view>
+    <view class="subtitle">{{movie.type}}</view>
+  </view>
+  
+  <!-- Description -->
+  <view class="body">{{movie.description}}</view>
 </view>
 
 

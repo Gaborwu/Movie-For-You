@@ -1,7 +1,7 @@
 <view class="index__container">
   <view class="title">Movie For You</view>
   <text class="subtitle">Vote with your friends, to find the best movie to watch tonight!</text> 
-  <view class="btn-container">
-    <button bindtap="redirectToLobby" class="btn btn-primary ">Enter the Lobby</button>
+  <view class="btn-container" style="position: absolute; bottom: 0;">
+    <view bindtap="redirectToLobby" class="btn btn-primary" >Enter the Lobby</view>
   </view>
 </view>

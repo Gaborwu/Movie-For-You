@@ -23,9 +23,13 @@
 }
 
 .btn {
-  margin: 80rpx !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
-  width: 80% !important;
   height: 80rpx;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  font-size: 32rpx;
+  font-weight: bold;
+  flex-grow: 1;
 }

@@ -3,31 +3,12 @@ page {
 }
 
 .btn-container {
-    position: fixed;
-    bottom: 0;
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 32rpx 32rpx;
     box-sizing: border-box;
-  }
-
-  .btn-container .top {
-      width: 100%;
-      margin: 8rpx 0;
-  }
-  
-  .btn-container .bottom {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      margin: 8rpx 0;
-  }
-
-  .btn-container .bottom .btn {
-      width: 47.5% !important;
   }
   
   .btn-primary {
@@ -44,11 +25,16 @@ page {
     background: #A833F0;
     color: white;
   }
-  
+
   .btn {
-    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 4px;
-    width: 100% !important;
     height: 80rpx;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font-size: 32rpx;
+    font-weight: bold;
+    flex-grow: 1 !important;
+    margin: 0 8rpx !important;
   }
