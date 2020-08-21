@@ -1,22 +1,19 @@
+<!-- Status Container -->
 <view class="status">{{lobby.winner ? "The winner is..." : "Let's vote!"}}</view>
+
+<!-- User Container -->
 <view class="users_container">
-    <view wx:for="{{lobby.users}}" class="users">
-        <block wx:if="{{item.submitted}}">
-            <image class="avatar avatarshadow" src="{{item.avatar}}"></image>
-            <view class="name">{{item.name}}</view>
-            <view class="name">Voted ✓</view>
-        </block>
-        <block wx:else>
-            <image class="avatar" src="{{item.avatar}}"></image>
-            <view class="name">{{item.name}}</view>
-        </block>
+    <view wx:for="{{lobby.users}}" class="user_container">
+        <image class="avatar {{item.submitted ? 'avatar-shadow' : ''}}" src="{{item.avatar}}"/>
+        <view class="name">{{item.name}}</view>
+        <view wx:if="{{item.submitted}}" class="name">Voted ✓</view>
     </view>
 </view>
 
 
 <block wx:if="{{!lobby.winner}}">
     <view class="btnarea">
-     <button class="btn btn-primary winnerbtn" wx:if="{{lobby.users[0].id == user.id}}" bindtap="findWinner">Calculate Winner</button>
+     
      </view>
     <!--Render Random Movies-->
     <view class="cards">
@@ -25,29 +22,23 @@
                 <view class="vote-btn {{ item.voted ? 'active': '' }}" catchtap="vote"  data-id="{{item.id}}">
                     <icon type="{{item.voted ? 'success': 'circle'}}" size="40" color="{{item.voted ? '#A833F0' : ''}}"></icon>
                 </view>
-
-
-                <!-- <view >{{item.voted ? '✓' : ''}}</view> -->
             </view>
             <view class="title">{{item.title}}</view>
         </view>
     </view>
 
 <!-- Buttons -->
-    <view class="btn-container">
-    
-
-        <view class="bottom">
-            <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn joinlobbybtn">Join Lobby</button>
-
-            <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary joinlobbybtn" >Join Lobby</button>
-
-            <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
-
-            <button wx:if="{{!user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" >Submit</button>
+    <view class="btn-container" style="position: fixed; bottom: 0;">
             
-            <button wx:if="{{user.submitted && user.isParticipant}}" class="btn btn-submit" bindtap="sumbitVoteToLobby" >Submitted</button>
-        </view>
+        <button wx:if="{{!user.nickname && !user.isParticipant}}" open-type="getUserInfo" bindgetuserinfo="userInfoHandler" class="btn btn-primary">Join Lobby</button>
+
+        <button wx:if="{{user.nickname && !user.isParticipant}}" bindtap="addUserToLobby" class="btn btn-primary joinlobbybtn" >Join Lobby</button>
+
+        <button wx:if="{{user.isParticipant}}" open-type="share" class="btn btn-share" >Share</button>
+
+        <button wx:if="{{!user.submitted && user.isParticipant && votes.length === 2 && !user.voted}}" class="btn btn-submit" bindtap="sumbitVoteToLobby">Submit</button>
+
+        <button class="btn btn-primary" wx:if="{{lobby.users[0].id === user.id && lobby.votes.length / 2 === lobby.users.length}}" bindtap="findWinner">Calculate</button>
     </view>
 </block>
 
@@ -76,8 +67,3 @@
         <!-- <button bindtap="navigateToUserPage" class="btn btn-submit">Watched List</button> -->
     </view>
 </block>
-
-
-<!-- User -->
-
-

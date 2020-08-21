@@ -95,9 +95,9 @@
 				},
 				{
 					"id": 5,
-					"name": "pages/showPage/showPage",
-					"pathName": "pages/showPage/showPage",
-					"query": "id=5f38f3fe7d4cce06a3e1d01d",
+					"name": "pages/show/show",
+					"pathName": "pages/show/show",
+					"query": "id=5f38f3fe7d4cce06a3e1d01f",
 					"scene": null
 				},
 				{

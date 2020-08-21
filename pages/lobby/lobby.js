@@ -94,6 +94,9 @@ Page({
     findWinner: function () {
         let lobby = this.data.lobby
          if (lobby.users.length * 2 != lobby.votes.length) {
+            wx.showToast({
+              title: 'someone not voted! wait!',
+            })
             return
         };
         let res = []
@@ -102,9 +105,7 @@ Page({
             if (r != undefined) {
                 r.score += 1
             } else {
-                r = {}
-                r.id = e
-                r.score = 1
+                r = {id: e, score: 1}
             }
             res.push(r)
         })

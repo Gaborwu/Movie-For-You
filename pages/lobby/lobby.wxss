@@ -4,11 +4,42 @@ page {
     color: #FBFBFB;
     padding-bottom: 60px;
 }
-.avatar {
+
+.status {
+    font-family: ShadowsIntoLight;
+    display: flex;
+    justify-content: center;
+    font-size: 48rpx;
+    color: #A833F0;
+}
+
+.users_container {
+    display: flex;
+    margin: 16rpx 0;
+    overflow: scroll;
+    justify-content: center;
+}
+
+.users_container .user_container {
+    text-align: center;
+    margin: 0 16rpx;
+}
+
+.users_container .user_container .avatar {
     border-radius: 50%;
     height: 120rpx;
     width: 120rpx;
 }
+
+.users_container .user_container .avatar-shadow {
+    border: 6rpx solid #A833F0;
+}
+
+.users_container .user_container .name {
+    font-size: 25rpx;
+    margin-top: 8rpx;
+}
+
 .margintop20 {
     margin-top: 20rpx;
 }
@@ -16,26 +47,13 @@ page {
     margin: 0rpx 24rpx;
     font-family: Alata;
 }
-.user_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+
 .bottomLine {
     border-bottom: 2rpx solid #FBFBFB ;
     margin: 0 24rpx;
 }
-.users_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 8rpx;
-    margin-bottom: 16rpx;
-}
-.name {
-    font-size: 25rpx;
-    margin-top: 8rpx;
-}
+
+
 .movie {
     background-size: cover !important;
     background-repeat: no-repeat !important;
@@ -55,20 +73,6 @@ page {
     grid-row-gap: 8rpx;
     grid-column-gap: 48rpx;
     margin: 24rpx;
-}
-
-.status {
-    font-family: ShadowsIntoLight;
-    display: flex;
-    justify-content: center;
-    font-size: 48rpx;
-    color: #A833F0;
-    margin-top: 8rpx;
-}
-
-.avatarshadow {
-    border-radius: 50%;
-    border: 6rpx solid #A833F0;
 }
 
 .winner-container .poster {
@@ -102,19 +106,13 @@ page {
     font-size: 30rpx;
     margin-left: 8rpx;
 }
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .voteAgainBtn {
     color: #A833F0;
     margin-bottom: 32rpx !important;
     width: 65% !important;
 }
-.joinlobbybtn {
-    width: 90%;
-}
+
 .users {
     display: flex;
     flex-direction: column;
