@@ -1,18 +1,20 @@
 // pages/user/user.js
 Page({
-
-    data: {
-
+    userInfoHandler(data) {
+        wx.BaaS.auth.loginWithWechat(data).then(user => {
+            wx.setStorageSync('user', user);
+            this.setData({user});
+        })
     },
-    getCurrentUser: function () {
-            wx.BaaS.auth.getCurrentUser().then(user => {
-                this.setData({user});
-            })
+
+    logout: function () {
+        wx.BaaS.auth.logout().then(res => {
+            wx.setStorageSync('user', null);
+            this.setData({user: null});
+        })
     },
 
     onLoad: function (options) {
-        this.getCurrentUser();
-
-    },
-
+        this.setData({user: wx.getStorageSync('user')});
+    }
 })

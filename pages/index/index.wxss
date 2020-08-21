@@ -2,7 +2,7 @@
 .index__container {
   color: #FBFBFB;
   background-image: url('https://cloud-minapp-36818.cloud.ifanrusercontent.com/1k8lLgxvDjfZE4zW.jpg');
-   background-size: 100% auto;
+   background-size: cover;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -11,6 +11,9 @@
 }
 
 .title {
+  width: 90%;
+  margin: 260rpx auto 32rpx auto;
+  text-align: center;
   font-family: Lobster;
   font-size: 96rpx;
   font-weight: bolder;
@@ -18,6 +21,9 @@
 }
 
 .subtitle {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
   font-size: 36rpx;
   text-shadow: yellow 1px 0 10px;
 }
@@ -32,4 +38,17 @@
   font-size: 32rpx;
   font-weight: bold;
   flex-grow: 1;
+}
+
+.btn-user {
+  position: absolute; 
+  top: 32rpx;
+  right: 32rpx;
+  color: white;
+  background: #A833F0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  padding: 8rpx 48rpx;
+  box-sizing: border-box;
 }

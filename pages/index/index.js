@@ -19,6 +19,12 @@ Page({
     })
   },
 
+  navigateToUser: function () {
+    wx.navigateTo({
+      url: '../user/user'
+    })
+  },
+
   onLoad: function() {
     this.importFont();
   }

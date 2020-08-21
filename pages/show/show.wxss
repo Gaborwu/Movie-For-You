@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
 }
-
 .show__image-container .image {
   background-size: cover !important;
   background-position: center !important;

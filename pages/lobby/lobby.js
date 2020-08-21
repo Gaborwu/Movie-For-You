@@ -5,17 +5,15 @@ Page({
         movies_list: []
     },
 
-    createLobby: async function () {
+    createLobby: async function (user) {
         wx.showLoading({title: 'Creating Lobby...'});
 
         let Lobby = new wx.BaaS.TableObject('lobby');
         let lobby = Lobby.create();
-
-        let user = this.data.user;
         
-        user =  { id: user.id, name: user.nickname, avatar: user.avatar, owner: true };
+        let user_data =  { id: user.id, name: user.nickname || undefined, avatar: user.avatar, owner: true };
 
-        let users = [user];
+        let users = [user_data];
 
         let movie_list = await this.fetchRandomMovies();
 
@@ -25,7 +23,7 @@ Page({
             
             user['isParticipant'] = true;
             
-            this.setData({lobby, user, movies_list});
+            this.setData({lobby, movies_list});
             this.backgroundRefresh();
             wx.hideLoading();
         })
@@ -44,25 +42,16 @@ Page({
             })
         })
     },
-
-    getCurrentUser: function () {
-        return new Promise(resolve => {
-            wx.BaaS.auth.getCurrentUser().then(user => {
-                this.setData({user});
-                resolve();
-            })
-        })
-    },
     
     backgroundRefresh: function (id) {
         id = this.data.lobby && this.data.lobby.id ? this.data.lobby.id : id;
         setInterval(() => this.getLobby(id), 1000, id);
     },
 
-    navigateToMovie: function(e) {
+    navigateToShow: function(e) {
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
-          url: `../showPage/showPage?id=${id}`,
+          url: `../show/show?id=${id}`,
         })
     },
 
@@ -77,18 +66,11 @@ Page({
             this.checkUserParticipation();
         })
         
-        if (this.data.movies_list.length == 0 && this.data.lobby != null) {
+        if (this.data.movies_list.length === 0 && this.data.lobby !== null) {
             this.fetchMovies(this.data.lobby).then(res => {
                 this.setData({movies_list: res})
             });
         }
-    },
-
-    GoToShow:function(e){
-        const id = e.currentTarget.dataset.id
-        wx.navigateTo({
-          url: '/pages/show/show?id=' + id,
-        })
     },
 
     findWinner: function () {
@@ -134,15 +116,17 @@ Page({
         let user = this.data.user;
         let users = this.data.lobby.users.map(user => user.id);
         let lobby_user = this.data.lobby.users.find(item => item.id == user.id)
-        if (lobby_user.submitted == true) {
-            user['submitted'] = true 
-        }
+        
+        if (lobby_user && lobby_user.submitted === true) user['submitted'] = true;
+        
         user['isParticipant'] = users.includes(this.data.user.id);
+        
         this.setData({user});
     },
 
     userInfoHandler: function (data) {
         wx.BaaS.auth.loginWithWechat(data).then(user => {
+            wx.setStorageSync('user', user);
             this.setData({user});
             this.addUserToLobby();
         })
@@ -155,18 +139,21 @@ Page({
       },
 
     addUserToLobby: function () {
-        let lobby = this.data.lobby;
-        let users = lobby.users;
-
         let user = this.data.user;
-        user =  { id: user.id, name: user.nickname, avatar: user.avatar };
-
-        users.push(user);
-        
-        let Lobby = new wx.BaaS.TableObject('lobby');
-        let entry = Lobby.getWithoutData(lobby.id);
-
-        entry.set({users}).update().then(this.getLobby(lobby.id));
+        if (!user.isParticipant) {
+            let lobby = this.data.lobby;
+            let users = lobby.users;
+    
+            let user = this.data.user;
+            user =  { id: user.id, name: user.nickname, avatar: user.avatar };
+    
+            users.push(user);
+            
+            let Lobby = new wx.BaaS.TableObject('lobby');
+            let entry = Lobby.getWithoutData(lobby.id);
+    
+            entry.set({users}).update().then(this.getLobby(lobby.id));
+        }
     },
 
     onShareAppMessage: function () {
@@ -216,7 +203,6 @@ Page({
     },
 
     vote: function (e) {
-
         let user = this.data.user;
         if (!user.voted) {
             let votes = this.data.votes;
@@ -246,25 +232,30 @@ Page({
         })
     },
     sumbitVoteToLobby: function() {
+        this.setData({'user.submitted': true});
         let lobby = this.data.lobby;
         let votes = this.data.votes;
-        let Lobby = new wx.BaaS.TableObject('lobby');
         let user = this.data.user;
+
+        let Lobby = new wx.BaaS.TableObject('lobby');
+        
         Lobby.get(lobby.id).then(res => {
-            // console.log(res);
+
             let votesArray = res.data.votes
             let user_votes = res.data.user_votes
             let lobby_users = res.data.users;
-            // console.log(lobby_users)
+
             let lobby_user = res.data.users.find( item => item.id == user.id);
-            // console.log(lobby_user)
             let lobby_user_index = res.data.users.findIndex((item => item.id === user.id));
-            // console.log(lobby_user_index)
+            
             lobby_user.submitted = true
             lobby_users[lobby_user_index] = lobby_user
             user_votes.push({user_id: user.id, movie_id: votes})
+            
             votes.forEach(vote => votesArray.push(vote));
+            
             let entry = Lobby.getWithoutData(lobby.id);
+            
             entry.set({votes: votesArray, user_votes: user_votes, users: lobby_users}).update().then(res => {
                 this.setData({lobby: res.data, 'user.voted': true});
             })
@@ -273,10 +264,12 @@ Page({
 
     onLoad: async function (options) {
         const id = options && options.id ? options.id : undefined;
+        const user = wx.getStorageSync('user');
+
+        this.setData({user});
+
         this.importFont();
         
-        await this.getCurrentUser();
-
-        id ? this.backgroundRefresh(id) : this.createLobby();
+        id ? this.backgroundRefresh(id) : this.createLobby(user);
     }
 })

@@ -1,9 +1,15 @@
-page {
-    background-color: #0F100F;
-    color: #FBFBFB;
+.user__container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64rpx 32rpx;
+    box-sizing: border-box;
 }
-.avatar {
+
+.user__container .avatar {
     border-radius: 50%;
-    height: 120rpx;
-    width: 120rpx;
+    height: 160rpx;
+    width: 160rpx;
+    margin: 16rpx 0;
 }

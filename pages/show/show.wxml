@@ -1,4 +1,3 @@
-
 <view class="show__image-container">
   <view class="image" style="background: url(https://cloud-minapp-36818.cloud.ifanrusercontent.com/{{movie.thumbnail}})"></view>
 </view>
