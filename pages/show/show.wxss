@@ -22,13 +22,13 @@
 
 .show__info-container .header {
   font-family: 'Lato';
-  font-size: 64rpx;
+  font-size: 56rpx;
   font-weight: bolder;
   margin-bottom: 16rpx;
 }
 
 .show__info-container .subtitle {
-  font-size: 40rpx;
+  font-size: 32rpx;
   font-weight: bolder;
   margin: 16rpx 0;
   color: #A833F0;
