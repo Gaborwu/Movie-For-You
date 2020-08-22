@@ -22,7 +22,7 @@
 
 .show__info-container .header {
   font-family: 'Lato';
-  font-size: 64rpx;
+  font-size: 48rpx;
   font-weight: bolder;
   margin-bottom: 16rpx;
 }
