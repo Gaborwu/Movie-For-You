@@ -28,7 +28,7 @@
 }
 
 .show__info-container .subtitle {
-  font-size: 40rpx;
+  font-size: 32rpx;
   font-weight: bolder;
   margin: 16rpx 0;
   color: #A833F0;

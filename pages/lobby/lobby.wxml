@@ -53,12 +53,12 @@
     </view>
     <view class="show__info-container">
         <!-- Title -->
-        <view class="header">{{lobby.winner.title}}</view>            
+        <view class="header">{{lobby.winner.title}}</view>    
         
         <!-- Tags -->
         <view class="flex-content-between">
             <view class="subtitle">{{lobby.winner.rating}}</view>
-            <view class="subtitle">{{lobby.winner.release_year}}</view>                <view class="subtitle">{{lobby.winner.type}}</view>
+            <view class="subtitle">{{lobby.winner.release_year}}</view>                <view class="subtitle">{{lobby.winner.country}}</view>
         </view>
         
         <!-- Description -->
