@@ -1,5 +1,6 @@
 page {
-    background: linear-gradient(120deg, #000000 0%, rgba(168, 51, 240, 0.3) 100%), #000000;
+    background: rgba(168, 51, 240, 0.3); /* fallback for old browsers */
+    background: linear-gradient(to right, #000000, #360033);
     color: white;
 }
 
