@@ -9,7 +9,7 @@
   <view class="flex-content-between">
     <view class="subtitle">{{movie.rating}}</view>
     <view class="subtitle">{{movie.release_year}}</view>
-    <view class="subtitle">{{movie.type}}</view>
+    <view class="subtitle">{{movie.country}}</view>
   </view>
   
   <!-- Description -->
